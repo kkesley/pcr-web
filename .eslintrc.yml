@@ -1,0 +1,62 @@
+plugins:
+    - '@typescript-eslint'
+    - react
+    - prettier
+    - jest
+parserOptions:
+    ecmaVersion: 9
+    sourceType: module
+    ecmaFeatures:
+        jsx: true
+extends:
+    - plugin:@typescript-eslint/recommended
+    - eslint:recommended
+    - plugin:react/recommended
+    - prettier
+    - prettier/@typescript-eslint
+rules:
+    '@typescript-eslint/camelcase': 'off'
+    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off'
+    no-trailing-spaces: error
+    no-console:
+        - error
+        - allow:
+            - debug
+            - error
+    no-duplicate-imports: error
+    no-unreachable: error
+    no-unexpected-multiline: error
+    no-extra-semi: error
+    no-empty: error
+    no-useless-catch: error
+    prettier/prettier: error
+    prefer-destructuring: error
+    max-len:
+        - error
+        - code: 255
+          tabWidth: 4
+    comma-dangle:
+        - error
+        - arrays: always-multiline
+          objects: always-multiline
+          imports: always-multiline
+          exports: never
+          functions: never
+    react/self-closing-comp:
+        - error
+        - component: true
+          html: true
+    react/jsx-indent:
+        - error
+        - 4
+    react/jsx-indent-props:
+        - error
+        - 4
+    react/prop-types:
+        - off
+env:
+    browser: true
+    node: true
+    jest: true
+    es6: true

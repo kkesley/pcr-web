@@ -4,20 +4,20 @@ import RecipeDetail from './pages/RecipeDetail'
 import RecipeList from './pages/RecipeList'
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path={['/', '/recipes']} exact>
-            <RecipeList />
-          </Route>
-          <Route path="/recipes/:recipeId">
-            <RecipeDetail />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
-  )
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Switch>
+                    <Route path={['/', '/recipes']} exact>
+                        <RecipeList />
+                    </Route>
+                    <Route path="/recipes/:recipeId">
+                        <RecipeDetail />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </div>
+    )
 }
 
 export default App

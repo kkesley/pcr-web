@@ -1,5 +1,5 @@
 import React from 'react'
 
 export default function RecipeDetail() {
-  return <h1>Recipe Detail</h1>
+    return <h1>Recipe Detail</h1>
 }
