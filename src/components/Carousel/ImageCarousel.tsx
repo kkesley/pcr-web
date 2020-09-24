@@ -2,20 +2,21 @@ import React, { useRef } from 'react'
 import { animated, useTransition, useSpring } from 'react-spring'
 import { useHoverDirty } from 'react-use'
 import { isMobile } from 'react-device-detect'
-import { ICarouselItem } from './types'
+import { CarouselItem } from './types'
 import { useCarouselNavigation, useSwipe, getTransitionTransformStyle } from './ImageCarousel.helpers'
 
 interface CarouselProps {
-    items: ICarouselItem[]
+    items: CarouselItem[]
 }
 
-export default function Carousel({ items }: CarouselProps): React.ReactNode {
+export default function Carousel({ items }: CarouselProps): React.ReactElement | null {
     const ref = useRef(null)
     const isHovering = useHoverDirty(ref)
     const { next, previous, activeIndex, transitionDirection } = useCarouselNavigation(items)
     const bind = useSwipe({ onSwipeLeft: next, onSwipeRight: previous })
 
-    const transitions = useTransition(activeIndex, (p: number) => p, {
+    const transitions = useTransition(activeIndex, {
+        key: (p) => p,
         from: {
             opacity: 0,
             transform: getTransitionTransformStyle(transitionDirection, true),
@@ -32,20 +33,16 @@ export default function Carousel({ items }: CarouselProps): React.ReactNode {
     return (
         <div ref={ref}>
             {!isMobile && (
-                <animated.button onClick={() => previous()} style={buttonStyle}>
+                <animated.button onClick={() => previous()} style={buttonStyle as any}>
                     <span className="icon is-size-3 is-small">
                         <i className="fas fa-chevron-left" />
                     </span>
                 </animated.button>
             )}
             <figure {...bind()} className={`image is-${isMobile ? '4by5' : '16by9'}`}>
-                {transitions.map(({ item, props, key }) => {
-                    return (
-                        <animated.div key={key} style={props}>
-                            <img src={items[item].imageUrl || ''} alt={`Banner ${item}`} />
-                        </animated.div>
-                    )
-                })}
+                {transitions((style, item) => (
+                    <animated.img style={style as any} src={items[item].imageUrl || ''} alt={`Banner ${activeIndex}`} />
+                ))}
             </figure>
             <div className="is-hidden">
                 {items.map((carouselItem, index) => (
@@ -53,7 +50,7 @@ export default function Carousel({ items }: CarouselProps): React.ReactNode {
                 ))}
             </div>
             {!isMobile && (
-                <animated.button onClick={() => next()} style={buttonStyle}>
+                <animated.button onClick={() => next()} style={buttonStyle as any}>
                     <span className="icon is-size-3 is-small">
                         <i className="fas fa-chevron-right" />
                     </span>

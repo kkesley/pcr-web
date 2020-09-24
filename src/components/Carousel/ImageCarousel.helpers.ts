@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
-import { ICarouselItem, ICarouselNavigation, Direction } from './types'
+import { CarouselItem, CarouselNavigation, Direction } from './types'
 import { useDrag } from 'react-use-gesture'
 
-export function useCarouselNavigation(items: ICarouselItem[]): ICarouselNavigation {
+export function useCarouselNavigation(items: CarouselItem[]): CarouselNavigation {
     const [activeIndex, setActiveIndex] = useState(0)
     const [transitionDirection, setTransitionDirection] = useState(Direction.RIGHT)
 

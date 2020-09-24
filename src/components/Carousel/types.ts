@@ -1,4 +1,4 @@
-export interface ICarouselItem {
+export interface CarouselItem {
     name: string
     imageUrl: string
 }
@@ -8,7 +8,7 @@ export enum Direction {
     RIGHT,
 }
 
-export interface ICarouselNavigation {
+export interface CarouselNavigation {
     next: () => void
     previous: () => void
     activeIndex: number
