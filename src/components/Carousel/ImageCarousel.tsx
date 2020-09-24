@@ -1,10 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import classnames from 'classnames'
 import { animated, useTransition } from 'react-spring'
 import { isMobile } from 'react-device-detect'
 import { CarouselItem } from './types'
-import { useCarouselNavigation, useSwipe, getTransitionTransformStyle } from './ImageCarousel.helpers'
+import { useCarouselNavigation, getTransitionTransformStyle, createDragHandler } from './ImageCarousel.helpers'
 import styles from './ImageCarousel.module.css'
+import { useDrag } from 'react-use-gesture'
 
 interface CarouselProps {
     items: CarouselItem[]
@@ -13,7 +14,7 @@ interface CarouselProps {
 export default function Carousel({ items }: CarouselProps): React.ReactElement | null {
     const ref = useRef(null)
     const { next, previous, activeIndex, transitionDirection } = useCarouselNavigation(items)
-    const bind = useSwipe({ onSwipeLeft: next, onSwipeRight: previous })
+    const bind = useDrag(useCallback(createDragHandler({ onSwipeLeft: next, onSwipeRight: previous }), [next, previous]), { axis: 'x' })
 
     const transitions = useTransition(activeIndex, {
         key: (p) => p,

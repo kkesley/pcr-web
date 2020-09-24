@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { CarouselItem, CarouselNavigation, Direction } from './types'
-import { useDrag } from 'react-use-gesture'
+import { Handler } from 'react-use-gesture/dist/types'
 
 export function useCarouselNavigation(items: CarouselItem[]): CarouselNavigation {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -18,25 +18,22 @@ export function useCarouselNavigation(items: CarouselItem[]): CarouselNavigation
     return useMemo(() => ({ next, previous, activeIndex, transitionDirection }), [next, previous, activeIndex, transitionDirection])
 }
 
-interface SwipeHookArgs {
+interface CreateDragHandlerArgs {
     onSwipeLeft: () => void
     onSwipeRight: () => void
 }
 
-export function useSwipe({ onSwipeLeft, onSwipeRight }: SwipeHookArgs): ReturnType<typeof useDrag> {
-    return useDrag(
-        ({ down, direction: [xDir], elapsedTime }) => {
-            // check for elapsedTime because a tap will trigger this handler twice.
-            // the second trigger would have an elapsedTime of ~0
-            if (down || elapsedTime < 2) return
-            if (xDir <= 0) {
-                onSwipeLeft()
-            } else if (xDir > 0) {
-                onSwipeRight()
-            }
-        },
-        { axis: 'x' }
-    )
+export function createDragHandler({ onSwipeLeft, onSwipeRight }: CreateDragHandlerArgs): Handler<'drag'> {
+    return ({ down, direction: [xDir], elapsedTime }) => {
+        // check for elapsedTime because a tap will trigger this handler twice.
+        // the second trigger would have an elapsedTime of ~0
+        if (down || elapsedTime < 2) return
+        if (xDir <= 0) {
+            onSwipeLeft()
+        } else if (xDir > 0) {
+            onSwipeRight()
+        }
+    }
 }
 
 export function getTransitionTransformStyle(transitionDirection: Direction, isEntering: boolean): string {

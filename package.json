@@ -5,6 +5,7 @@
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
+        "@testing-library/react-hooks": "^3.4.1",
         "@testing-library/user-event": "^7.1.2",
         "@types/classnames": "2.2.10",
         "@types/jest": "^24.0.0",
@@ -14,12 +15,14 @@
         "@types/react-router-dom": "5.1.5",
         "bulma": "0.9.0",
         "classnames": "2.2.6",
+        "history": "^5.0.0",
         "react": "^16.13.1",
         "react-device-detect": "^1.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "5.2.0",
         "react-scripts": "3.4.3",
         "react-spring": "^9.0.0-rc.3",
+        "react-test-renderer": "^16.13.1",
         "react-use": "^15.3.4",
         "react-use-gesture": "^7.0.16",
         "typescript": "~3.7.2"
@@ -57,6 +60,15 @@
         "lint-staged": "10.4.0",
         "prettier": "2.1.2",
         "source-map-explorer": "2.5.0"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**/*.{ts,tsx}",
+            "!src/index.ts",
+            "!src/react-app-env.d.ts",
+            "!src/serviceWorker.ts",
+            "!src/setupTests.ts"
+        ]
     },
     "husky": {
         "hooks": {
