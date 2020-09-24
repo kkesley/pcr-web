@@ -4,7 +4,7 @@ frontend:
         preBuild:
             commands:
                 - yarn install --frozen-lockfile
-                - yarn test
+                - CI=true yarn test
         build:
             commands:
                 - yarn run build
