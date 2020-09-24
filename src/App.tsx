@@ -1,20 +1,12 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import RecipeDetail from './pages/RecipeDetail'
-import RecipeList from './pages/RecipeList'
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './AppRouter'
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <Switch>
-                    <Route path={['/', '/recipes']} exact>
-                        <RecipeList />
-                    </Route>
-                    <Route path="/recipes/:recipeId">
-                        <RecipeDetail />
-                    </Route>
-                </Switch>
+                <AppRouter />
             </BrowserRouter>
         </div>
     )
