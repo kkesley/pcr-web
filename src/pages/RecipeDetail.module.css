@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.bannerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bannerInnerContainer {
+    flex: 1;
+    padding: 0 2.5rem;
+}
